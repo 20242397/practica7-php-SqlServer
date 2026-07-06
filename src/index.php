@@ -1,14 +1,14 @@
 <?php
 $host = 'db';
 $dbname = 'holamundo';
-$user = 'sa';
-$password = 'Secret123!';
+$user = 'root';
+$password = 'secret';
 
 $connected = false;
 $error = '';
 
 try {
-    $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname", $user, $password, [
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password, [
         PDO::ATTR_TIMEOUT => 5,
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
@@ -21,7 +21,7 @@ try {
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Hola Mundo - PHP + SQL Server + Docker</title>
+  <title>Hola Mundo - PHP + MySQL + Docker</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -51,11 +51,16 @@ try {
       font-size: 0.9rem;
       margin-top: 0.75rem;
     }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
     .ok  { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
     .err { background: #ff3c3c; box-shadow: 0 0 8px #ff3c3c; }
-    .error-msg { color: #ff3c3c; font-family: monospace; font-size: 0.75rem; margin-top: 0.5rem; max-width: 400px; }
-    .stack { display: flex; gap: 0.75rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .error-msg { color: #ff3c3c; font-family: monospace; font-size: 0.75rem; margin-top: 0.5rem; }
+    .stack {
+      display: flex; gap: 0.75rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;
+    }
     .badge {
       font-family: monospace; font-size: 0.7rem;
       padding: 0.3rem 0.8rem;
@@ -68,7 +73,7 @@ try {
   <h1>¡Hola Mundo!</h1>
 
   <div class="card">
-    <p style="color:#5a5a7a; font-size:0.8rem; font-family:monospace;">Conexión a SQL Server</p>
+    <p style="color:#5a5a7a; font-size:0.8rem; font-family:monospace;">Conexión a MySQL</p>
     <?php if ($connected): ?>
       <div class="status">
         <span class="dot ok"></span>
@@ -84,7 +89,7 @@ try {
 
     <div class="stack">
       <span class="badge">PHP <?= phpversion() ?></span>
-      <span class="badge">SQL Server</span>
+      <span class="badge">MySQL</span>
       <span class="badge">Docker Compose</span>
     </div>
   </div>
